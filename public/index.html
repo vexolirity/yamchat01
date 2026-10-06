@@ -1,3 +1,82 @@
-<!doctype html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NEXUS • Realtime Room Chat</title><link rel="stylesheet" href="/style.css"></head><body>
-<main id="landing"><section class="card"><div class="logo">✦</div><small>REALTIME COMMUNICATION</small><h1>NEXUS<span>.</span></h1><p>Satu room. Semua orang. Percakapan yang langsung tersambung.</p><form id="join"><label>Nama pengguna<input id="name" maxlength="24" placeholder="Contoh: Yama" required></label><label>Room ID<input id="room" maxlength="40" placeholder="Contoh: KELAS-9A" required></label><button>Masuk ke room →</button></form><div class="tags">⚡ Realtime　● Multi-user　⌁ Room-based</div></section></main>
-<main id="app" class="hidden"><aside><div class="brand">✦ NEXUS</div><div class="profile"><b id="me">U</b><span><strong id="myname"></strong><small>● Online</small></span></div><div class="label">ROOM</div><div class="room" id="roomName"></div><div class="label members-label">ANGGOTA <i id="count">0</i></div><div id="members"></div><footer>● Terhubung<br><small>Realtime • Socket.IO</small></footer></aside><section class="chat"><header><div><h2 id="title"></h2><small id="summary"></small></div><button id="leave">↪</button></header><div id="messages"><div class="welcome"><b>✦</b><h3>Selamat datang di room</h3><p>Kirim pesan untuk memulai percakapan.</p></div></div><div id="typing"></div><form id="send"><input id="msg" maxlength="1000" placeholder="Tulis pesan..." autocomplete="off"><button>↑</button></form></section></main><script src="/socket.io/socket.io.js"></script><script src="/app.js"></script></body></html>
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEXUS • Realtime Chat + Video Call</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#8b6cff">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<main id="landing">
+  <section class="card">
+    <div class="logo">✦</div>
+    <small>REALTIME COMMUNICATION</small>
+    <h1>NEXUS<span>.</span></h1>
+    <p>Chat, video call, dan kolaborasi dalam satu room.</p>
+    <form id="join">
+      <label>Nama pengguna<input id="name" maxlength="24" placeholder="Contoh: Yama" required></label>
+      <label>Room ID<input id="room" maxlength="40" placeholder="Contoh: KELAS-9A" required></label>
+      <label>Password (opsional)<input id="pass" type="password" placeholder="Kosongkan kalau publik"></label>
+      <button type="submit">Masuk ke room →</button>
+    </form>
+    <div class="tags">⚡ Realtime • Video Call • File • PWA</div>
+  </section>
+</main>
+
+<main id="app" class="hidden">
+  <aside>
+    <div class="brand">✦ NEXUS</div>
+    <div class="profile">
+      <b id="me">U</b>
+      <span><strong id="myname"></strong><small>● Online</small></span>
+    </div>
+    <div class="label">ROOM</div>
+    <div class="room" id="roomName"></div>
+    <div class="label members-label">ANGGOTA <i id="count">0</i></div>
+    <div id="members"></div>
+    <footer>● Terhubung<br><small>Realtime • Socket.IO</small></footer>
+  </aside>
+
+  <section class="chat">
+    <header>
+      <div><h2 id="title"></h2><small id="summary"></small></div>
+      <div class="actions">
+        <button id="btnVideo" title="Video Call">📹</button>
+        <button id="leave" title="Keluar">↪</button>
+      </div>
+    </header>
+
+    <div id="videoWrap" class="hidden">
+      <iframe id="videoFrame" allow="camera; microphone; fullscreen; display-capture"></iframe>
+    </div>
+
+    <div id="messages">
+      <div class="welcome">
+        <b>✦</b>
+        <h3>Selamat datang di room</h3>
+        <p>Kirim pesan untuk memulai percakapan.</p>
+      </div>
+    </div>
+    <div id="typing"></div>
+
+    <form id="send">
+      <label class="fileBtn">
+        📎<input type="file" id="fileInput" hidden>
+      </label>
+      <input id="msg" type="text" maxlength="1000" placeholder="Tulis pesan..." autocomplete="off">
+      <button type="submit">↑</button>
+    </form>
+  </section>
+</main>
+
+<!-- GANTI URL INI DENGAN URL RAILWAY KAMU -->
+<script>
+  window.NEXUS_BACKEND = "https://nexus-backend.up.railway.app";
+</script>
+<script src="https://nexus-backend.up.railway.app/socket.io/socket.io.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

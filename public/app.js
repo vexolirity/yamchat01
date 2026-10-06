@@ -9,19 +9,23 @@ const s = io(BACKEND, {
 const $ = (id) => document.getElementById(id);
 let me = "", room = "", typing = new Set(), timer;
 
+s.on("connect", () => console.log("✅ Connected to backend"));
+s.on("connect_error", (err) => console.log("❌ Connect error:", err.message));
+s.on("disconnect", () => console.log("❌ Disconnected"));
+
 $("join").onsubmit = (e) => {
   e.preventDefault();
   me = $("name").value.trim();
   room = $("room").value.trim().toUpperCase();
   const pass = $("pass").value;
+  console.log("📤 Join room:", { me, room, pass });
   if (me && room) s.emit("join-room", { username: me, roomId: room, password: pass });
 };
 
-s.on("connect", () => console.log("✅ Connected to backend"));
-s.on("disconnect", () => console.log("❌ Disconnected"));
-s.on("join-error", (x) => alert(x));
+s.on("join-error", (x) => alert("Gagal masuk: " + x));
 
 s.on("room-joined", (d) => {
+  console.log("✅ Room joined:", d);
   me = d.username;
   room = d.roomId;
   $("myname").textContent = me;
@@ -164,7 +168,6 @@ function add(m) {
 
   const reactions = document.createElement("div");
   reactions.className = "reactions";
-  reactions.style.fontSize = "10px";
 
   const reactBar = document.createElement("div");
   reactBar.className = "reactBar";
@@ -211,4 +214,4 @@ function bottom() {
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/sw.js").catch(() => {});
-    }
+}

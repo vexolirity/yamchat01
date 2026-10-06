@@ -72,11 +72,15 @@
   </section>
 </main>
 
-<!-- GANTI URL INI DENGAN URL RAILWAY KAMU -->
+<!-- GANTI URL DI BAWAH DENGAN URL RAILWAY KAMU -->
 <script>
-  window.NEXUS_BACKEND = "https://nexus-backend.up.railway.app";
+  window.NEXUS_BACKEND = "https://yamchat01-production.up.railway.app";
 </script>
-<script src="https://nexus-backend.up.railway.app/socket.io/socket.io.js"></script>
+
+<!-- Socket.IO dari CDN (JANGAN dari server) -->
+<script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+
+<!-- App kamu -->
 <script src="/app.js"></script>
 </body>
 </html>
